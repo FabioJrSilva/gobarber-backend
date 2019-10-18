@@ -13,7 +13,16 @@ class UserController {
   }
 
   async update(req, res) {
-    return res.json(req.userId);
+    const { oldPassword } = req.body;
+    const user = await User.findByPk(req.userId);
+
+    if (oldPassword && !(await user.checkPassword(oldPassword))) {
+      return res.status(401).json({ error: 'Password does not match.' });
+    }
+
+    const { id, name, email, provider } = await user.update(req.body);
+
+    return res.json({ id, name, email, provider });
   }
 }
 

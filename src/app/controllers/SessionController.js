@@ -13,7 +13,7 @@ class SessionController {
       return res.status(401).json({ error: 'User not found' });
     }
 
-    if (!(await user.checkPassword(email, password))) {
+    if (!(await user.checkPassword(password))) {
       return res
         .status(401)
         .json({ error: 'Email or Password does not matches' });
