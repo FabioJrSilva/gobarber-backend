@@ -11,7 +11,7 @@ class UserController {
         .required(),
       password: Yup.string()
         .required()
-        .min(6),
+        .min(6)
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -40,7 +40,7 @@ class UserController {
       confirmPassword: Yup.string().when('password', (password, field) =>
         password ? field.required().oneOf([Yup.ref('password')]) : field
       ),
-      provider: Yup.boolean(),
+      provider: Yup.boolean()
     });
 
     if (!(await schema.isValid(req.body))) {
