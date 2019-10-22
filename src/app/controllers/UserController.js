@@ -10,8 +10,11 @@ class UserController {
         .email()
         .required(),
       password: Yup.string()
-        .required()
         .min(6)
+        .required(),
+      confirmPassword: Yup.string().when('password', (password, field) =>
+        password ? field.required().oneOf([Yup.ref('password')]) : field
+      )
     });
 
     if (!(await schema.isValid(req.body))) {
