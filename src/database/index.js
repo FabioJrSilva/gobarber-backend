@@ -28,7 +28,8 @@ class Database {
       'mongodb://localhost:27017/gobarber',
       {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
       }
     );
   }
